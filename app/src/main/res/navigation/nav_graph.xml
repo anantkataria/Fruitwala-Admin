@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/all_orders_dest">
+
+    <fragment
+        android:id="@+id/all_orders_dest"
+        android:name="com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment.AllOrdersFragment"
+        android:label="All Current Orders"
+        tools:layout="@layout/fragment_all_orders" >
+        <action
+            android:id="@+id/action_all_orders_dest_to_particularOrderDetailsFragment"
+            app:destination="@id/particularOrderDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/change_fruit_prices_dest"
+        android:name="com.anantdevelopers.adminswipesinalpha2.ChangeFruitPricesFragment.ChangeFruitPricesFragment"
+        android:label="Change Prices"
+        tools:layout="@layout/fragment_change_fruit_prices" />
+    <fragment
+        android:id="@+id/closed_today_dest"
+        android:name="com.anantdevelopers.adminswipesinalpha2.CloseTheStoreFragment.CloseTheStoreFragment"
+        android:label="Close The Store"
+        tools:layout="@layout/fragment_close_the_store" />
+    <fragment
+        android:id="@+id/all_previous_orders_dest"
+        android:name="com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.AllPreviousOrdersFragment"
+        android:label="All Previous Orders"
+        tools:layout="@layout/fragment_all_previous_orders" />
+    <fragment
+        android:id="@+id/particularOrderDetailsFragment"
+        android:name="com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment.ParticularOrderDetailsFragment"
+        android:label="fragment_particular_order_details"
+        tools:layout="@layout/fragment_particular_order_details" />
+
+</navigation>

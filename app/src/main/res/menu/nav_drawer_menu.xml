@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/all_orders_dest"
+        android:title="All Current Orders"/>
+
+    <item
+        android:id="@+id/change_fruit_prices_dest"
+        android:title="Change Prices"/>
+
+    <item
+        android:id="@+id/all_previous_orders_dest"
+        android:title="All Previous Orders"/>
+
+    <item
+        android:id="@+id/closed_today_dest"
+        android:title="Close The Store"/>
+
+</menu>

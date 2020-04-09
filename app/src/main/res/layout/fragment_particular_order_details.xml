@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".UserActivity.UserActivity"
+        android:orientation="vertical">
+
+        <!--    initially order then user information then buttons as decided-->
+        <TextView
+            android:text="ORDER:"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/listOfFruitsTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="16dp"
+            android:textColor="@android:color/black"
+            android:text="Apple 1kg, 100 Rs.\nBananas 1kg, 50 Rs.\nOranges 1kg, 80 Rs."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/grandTotalTextView"
+            android:text="Total bill for User : 230 Rs."
+            android:textColor="@android:color/holo_red_light"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/paymentMethodTextView"
+            android:text="Payment method = COD"
+            android:textColor="@android:color/holo_green_dark"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="8dp"
+            android:text="USER:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:text="Name : Anant kataria"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/phoneNumberTextView1"
+            android:text="Phone Number1 : +916353923876"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/phoneNumberTextView2"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Phone Number2 : not given"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/buildingTextView"
+            android:text="Building : 1"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/wingLetterTextView"
+            android:layout_marginStart="16dp"
+            android:text="WingLetter : F"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/roomNumberTextView"
+            android:text="RoomNumber : 110"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/statusTextView"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="8dp"
+            android:text="Status : ORDER PROCESSING"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/statusOrderOnWayButton"
+            android:text="Change status to Order On Way"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/statusOrderDeliveredButton"
+            android:text="Change status to Order Delivered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/statusOrderCancelledButton"
+            android:text="Change status to Order Cancelled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</ScrollView>
