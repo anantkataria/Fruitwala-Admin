@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.CheckoutUser;
 import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.FruitItem;
 import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.User;
+import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.AllPreviousOrdersViewModel;
+import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.DatabaseNode;
 import com.anantdevelopers.adminswipesinalpha2.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,10 +30,14 @@ import java.util.ArrayList;
 
 public class ParticularOrderDetailsFragment extends Fragment {
 
+     private AllPreviousOrdersViewModel allPreviousOrdersViewModel;
+
      private FirebaseDatabase firebaseDatabase;
      private DatabaseReference databaseReference;
 
      private String authPhoneNumber, pushKey, status;
+     private String FruitsList = "";
+     private int totalPrice = 0;
 
      private CheckoutUser user;
      private User u;
@@ -56,6 +63,8 @@ public class ParticularOrderDetailsFragment extends Fragment {
           authPhoneNumber = u.getPhoneNum1();
           pushKey = user.getFirebaseDatabaseKey();
           status = user.getStatus();
+
+          allPreviousOrdersViewModel = new ViewModelProvider(this).get(AllPreviousOrdersViewModel.class);
      }
 
      @Override
@@ -108,7 +117,6 @@ public class ParticularOrderDetailsFragment extends Fragment {
 
                     //TODO implement addOrderToAllPreviousOrdersFragment - use Room database here for storage
                     //TODO and make sure to update status ORDER DELIVERED there
-                    //addOrderToALlPreviousOrdersFragment()
                     removeOrderFromOrders();
                     moveOrderToDeliveredOrCancelled(v);
                }
@@ -153,6 +161,7 @@ public class ParticularOrderDetailsFragment extends Fragment {
                public void onSuccess(Void aVoid) {
                     Toast.makeText(getContext(), "Added To 'Delivered or Cancelled'", Toast.LENGTH_SHORT).show();
                     //finish();
+                    addOrderToAllPreviousOrdersFragment();
                     Navigation.findNavController(v).popBackStack();
 
                }
@@ -165,10 +174,16 @@ public class ParticularOrderDetailsFragment extends Fragment {
 
      }
 
+     private void addOrderToAllPreviousOrdersFragment() {
+          String Address ="Building:" + u.getBuilding() + ", wing:" + u.getWing() + ", Room:" + u.getRoom();
+          DatabaseNode node = new DatabaseNode(u.getUserName(), u.getPhoneNum1(), u.getPhoneNum2(), FruitsList, Integer.toString(totalPrice), status, user.getPaymentMethod(), Address);
+          allPreviousOrdersViewModel.insert(node);
+     }
+
      private void setTexts() {
           ArrayList<FruitItem> fruits = user.getFruits();
-          String FruitsList = "";
-          int totalPrice = 0;
+
+
           for(FruitItem f: fruits){
                FruitsList += f.getFruitName() + ", " + f.getFruitQty() + ", " + f.getFruitPrice() + "\n";
                totalPrice += Integer.valueOf(f.getFruitPrice().replaceAll("[Rs.\\s]", ""));
