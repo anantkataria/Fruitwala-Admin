@@ -1,6 +1,5 @@
 package com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anantdevelopers.adminswipesinalpha2.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -59,7 +56,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
           TextView userAddressTxt;
           TextView userPhoneNumberTxt;
 
-          public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+          ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
                super(itemView);
                userNameTxt = itemView.findViewById(R.id.userNameTxt);
                userAddressTxt = itemView.findViewById(R.id.userAddressTxt);

@@ -1,10 +1,13 @@
 package com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "all_previous_orders_database")
-public class DatabaseNode {
+public class DatabaseNode implements Parcelable {
 
      @PrimaryKey(autoGenerate = true)
      private int id;
@@ -33,6 +36,30 @@ public class DatabaseNode {
           this.PaymentMethod = PaymentMethod;
           this.Address = Address;
      }
+
+     protected DatabaseNode(Parcel in) {
+          id = in.readInt();
+          Name = in.readString();
+          PhoneNumber1 = in.readString();
+          PhoneNumber2 = in.readString();
+          OrderDetails = in.readString();
+          GrandTotal = in.readString();
+          OrderStatus = in.readString();
+          PaymentMethod = in.readString();
+          Address = in.readString();
+     }
+
+     public static final Creator<DatabaseNode> CREATOR = new Creator<DatabaseNode>() {
+          @Override
+          public DatabaseNode createFromParcel(Parcel in) {
+               return new DatabaseNode(in);
+          }
+
+          @Override
+          public DatabaseNode[] newArray(int size) {
+               return new DatabaseNode[size];
+          }
+     };
 
      public void setId(int id) {
           this.id = id;
@@ -74,4 +101,21 @@ public class DatabaseNode {
           return Address;
      }
 
+     @Override
+     public int describeContents() {
+          return 0;
+     }
+
+     @Override
+     public void writeToParcel(Parcel dest, int flags) {
+          dest.writeInt(id);
+          dest.writeString(Name);
+          dest.writeString(PhoneNumber1);
+          dest.writeString(PhoneNumber2);
+          dest.writeString(OrderDetails);
+          dest.writeString(GrandTotal);
+          dest.writeString(OrderStatus);
+          dest.writeString(PaymentMethod);
+          dest.writeString(Address);
+     }
 }

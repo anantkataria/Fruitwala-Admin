@@ -176,7 +176,7 @@ public class ParticularOrderDetailsFragment extends Fragment {
 
      private void addOrderToAllPreviousOrdersFragment() {
           String Address ="Building:" + u.getBuilding() + ", wing:" + u.getWing() + ", Room:" + u.getRoom();
-          DatabaseNode node = new DatabaseNode(u.getUserName(), u.getPhoneNum1(), u.getPhoneNum2(), FruitsList, Integer.toString(totalPrice), status, user.getPaymentMethod(), Address);
+          DatabaseNode node = new DatabaseNode(u.getUserName(), u.getPhoneNum1(), u.getPhoneNum2(), FruitsList, Integer.toString(totalPrice), user.getStatus(), user.getPaymentMethod(), Address);
           allPreviousOrdersViewModel.insert(node);
      }
 

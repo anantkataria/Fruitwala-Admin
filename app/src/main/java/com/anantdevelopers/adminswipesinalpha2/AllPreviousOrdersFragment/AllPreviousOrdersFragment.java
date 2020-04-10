@@ -5,15 +5,18 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.OrderItemAdapter;
 import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.AllPreviousOrdersAdapter;
 import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.AllPreviousOrdersViewModel;
 import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.DatabaseNode;
@@ -43,7 +46,7 @@ public class AllPreviousOrdersFragment extends Fragment {
      public View onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
           // Inflate the layout for this fragment
-          View v = inflater.inflate(R.layout.fragment_all_previous_orders, container, false);
+          final View v = inflater.inflate(R.layout.fragment_all_previous_orders, container, false);
 
           noOrdersTxt = v.findViewById(R.id.noOrdersTxt);
           progressBar = v.findViewById(R.id.progressBar);
@@ -68,6 +71,18 @@ public class AllPreviousOrdersFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                }
           });
+
+          adapter.setOnItemClickListener(
+                  new AllPreviousOrdersAdapter.OnItemClickListener() {
+                       @Override
+                       public void onItemClick(int position) {
+                            Bundle b = new Bundle();
+                            DatabaseNode node = adapter.getItemAt(position);
+                            b.putParcelable("Order",node);
+                            Navigation.findNavController(v).navigate(R.id.action_all_previous_orders_dest_to_particularPastOrderDetailsFragment, b);
+                       }
+                  }
+          );
 
           return v;
      }

@@ -32,11 +32,23 @@
         android:id="@+id/all_previous_orders_dest"
         android:name="com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.AllPreviousOrdersFragment"
         android:label="All Previous Orders"
-        tools:layout="@layout/fragment_all_previous_orders" />
+        tools:layout="@layout/fragment_all_previous_orders" >
+        <action
+            android:id="@+id/action_all_previous_orders_dest_to_particularPastOrderDetailsFragment"
+            app:destination="@id/particularPastOrderDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/particularOrderDetailsFragment"
         android:name="com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment.ParticularOrderDetailsFragment"
         android:label="fragment_particular_order_details"
         tools:layout="@layout/fragment_particular_order_details" />
+    <fragment
+        android:id="@+id/particularPastOrderDetailsFragment"
+        android:name="com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.ParticularPastOrderDetailsFragment"
+        android:label="ParticularPastOrderDetailsFragment" />
 
 </navigation>
