@@ -14,10 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.CheckoutUser;
-import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.OrderItemAdapter;
+import com.anantdevelopers.adminswipesinalpha2.Stuff.CheckoutUser;
 import com.anantdevelopers.adminswipesinalpha2.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

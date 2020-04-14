@@ -22,7 +22,15 @@
         android:id="@+id/change_fruit_prices_dest"
         android:name="com.anantdevelopers.adminswipesinalpha2.ChangeFruitPricesFragment.ChangeFruitPricesFragment"
         android:label="Change Prices"
-        tools:layout="@layout/fragment_change_fruit_prices" />
+        tools:layout="@layout/fragment_change_fruit_prices" >
+        <action
+            android:id="@+id/action_change_fruit_prices_dest_to_particularFruitDetailsFragment"
+            app:destination="@id/particularFruitDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/closed_today_dest"
         android:name="com.anantdevelopers.adminswipesinalpha2.CloseTheStoreFragment.CloseTheStoreFragment"
@@ -50,5 +58,23 @@
         android:id="@+id/particularPastOrderDetailsFragment"
         android:name="com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.ParticularPastOrderDetailsFragment"
         android:label="ParticularPastOrderDetailsFragment" />
+    <fragment
+        android:id="@+id/particularFruitDetailsFragment"
+        android:name="com.anantdevelopers.adminswipesinalpha2.ChangeFruitPricesFragment.ParticularFruitDetailsFragment.ParticularFruitDetailsFragment"
+        android:label="fragment_particular_fruit_details"
+        tools:layout="@layout/fragment_particular_fruit_details" >
+        <action
+            android:id="@+id/action_particularFruitDetailsFragment_to_newQtyPriceEntryFragment"
+            app:destination="@id/newQtyPriceEntryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/newQtyPriceEntryFragment"
+        android:name="com.anantdevelopers.adminswipesinalpha2.ChangeFruitPricesFragment.ParticularFruitDetailsFragment.NewQtyPriceEntryFragment"
+        android:label="fragment_new_qty_price_entry"
+        tools:layout="@layout/fragment_new_qty_price_entry" />
 
 </navigation>

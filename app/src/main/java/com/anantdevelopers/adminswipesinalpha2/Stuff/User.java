@@ -1,4 +1,4 @@
-package com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff;
+package com.anantdevelopers.adminswipesinalpha2.Stuff;
 
 import android.os.Parcel;
 import android.os.Parcelable;

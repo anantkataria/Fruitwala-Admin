@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="veryLightBlue">#5D36B5F4</color>
+    <color name="holoRedLight">#ff4444</color>
+    <color name="holoGreenLight">#99cc00</color>
 </resources>

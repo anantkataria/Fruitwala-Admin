@@ -15,9 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.CheckoutUser;
-import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.FruitItem;
-import com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff.User;
+import com.anantdevelopers.adminswipesinalpha2.Stuff.CheckoutUser;
+import com.anantdevelopers.adminswipesinalpha2.Stuff.FruitItem;
+import com.anantdevelopers.adminswipesinalpha2.Stuff.User;
 import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.AllPreviousOrdersViewModel;
 import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.DatabaseNode;
 import com.anantdevelopers.adminswipesinalpha2.R;

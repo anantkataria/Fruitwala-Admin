@@ -1,4 +1,4 @@
-package com.anantdevelopers.adminswipesinalpha2.AdaptersAndStuff;
+package com.anantdevelopers.adminswipesinalpha2.ChangeFruitPricesFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +12,14 @@ import com.anantdevelopers.adminswipesinalpha2.R;
 
 import java.util.ArrayList;
 
-//this adapter will be common for both AllOrdersFragment and AllPreviousOrderFragment
-public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.ViewHolder> {
 
-     private ArrayList<CheckoutUser> orders;
+public class ChangeFruitPricesAdapter extends RecyclerView.Adapter<ChangeFruitPricesAdapter.ViewHolder> {
+
+     private ArrayList<String> fruitNames;
      private OnItemClickListener mListener;
 
-     public OrderItemAdapter(ArrayList<CheckoutUser> orders){
-          this.orders = orders;
+     public ChangeFruitPricesAdapter(ArrayList<String> fruitNames) {
+          this.fruitNames = fruitNames;
      }
 
      public interface OnItemClickListener{
@@ -30,37 +30,32 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
           mListener = listener;
      }
 
+
      @NonNull
      @Override
      public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-          View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_current_order, parent, false);
+          View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_change_fruit_price, parent, false);
           return new ViewHolder(v, mListener);
      }
 
      @Override
      public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-          User u = orders.get(position).getUser();
-          holder.userNameTxt.setText(u.getUserName());
-          holder.userPhoneNumberTxt.setText(u.getPhoneNum1());
-          holder.userAddressTxt.setText(u.getWing() + " - " + u.getRoom());
+          String currentName = fruitNames.get(position);
+          holder.fruitNameTxt.setText(currentName);
      }
 
      @Override
      public int getItemCount() {
-          return orders.size();
+          return fruitNames.size();
      }
 
-     static class ViewHolder extends RecyclerView.ViewHolder {
+     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-          TextView userNameTxt;
-          TextView userAddressTxt;
-          TextView userPhoneNumberTxt;
+          private TextView fruitNameTxt;
 
-          ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+          public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
                super(itemView);
-               userNameTxt = itemView.findViewById(R.id.userNameTxt);
-               userAddressTxt = itemView.findViewById(R.id.userAddressTxt);
-               userPhoneNumberTxt = itemView.findViewById(R.id.userPhoneNumberTxt);
+               fruitNameTxt = itemView.findViewById(R.id.fruit_name);
 
                itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -74,6 +69,5 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
                     }
                });
           }
-
      }
 }
