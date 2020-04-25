@@ -12,7 +12,10 @@ import com.anantdevelopers.adminswipesinalpha2.Stuff.CheckoutUser;
 import com.anantdevelopers.adminswipesinalpha2.Stuff.User;
 import com.anantdevelopers.adminswipesinalpha2.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 //this adapter will be common for both AllOrdersFragment and AllPreviousOrderFragment
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.ViewHolder> {
@@ -20,7 +23,9 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
      private ArrayList<CheckoutUser> orders;
      private OnItemClickListener mListener;
 
-     public OrderItemAdapter(ArrayList<CheckoutUser> orders){
+     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+     OrderItemAdapter(ArrayList<CheckoutUser> orders){
           this.orders = orders;
      }
 
@@ -41,10 +46,15 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 
      @Override
      public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-          User u = orders.get(position).getUser();
+          CheckoutUser user = orders.get(position);
+          User u = user.getUser();
+          String orderTime = user.getOrderPlacedDate();
+          Date date = new Date(Long.parseLong(orderTime));
+          formatter.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
           holder.userNameTxt.setText(u.getUserName());
           holder.userPhoneNumberTxt.setText(u.getPhoneNum1());
           holder.userAddressTxt.setText(u.getWing() + " - " + u.getRoom());
+          holder.orderPlacedTimeTxt.setText("Ordered : " + formatter.format(date));
      }
 
      @Override
@@ -57,12 +67,14 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
           TextView userNameTxt;
           TextView userAddressTxt;
           TextView userPhoneNumberTxt;
+          TextView orderPlacedTimeTxt;
 
           ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
                super(itemView);
                userNameTxt = itemView.findViewById(R.id.userNameTxt);
                userAddressTxt = itemView.findViewById(R.id.userAddressTxt);
                userPhoneNumberTxt = itemView.findViewById(R.id.userPhoneNumberTxt);
+               orderPlacedTimeTxt = itemView.findViewById(R.id.order_placed_time_text_view);
 
                itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -26,7 +26,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class ParticularOrderDetailsFragment extends Fragment {
 
@@ -35,15 +38,18 @@ public class ParticularOrderDetailsFragment extends Fragment {
      private FirebaseDatabase firebaseDatabase;
      private DatabaseReference databaseReference;
 
-     private String authPhoneNumber, pushKey, status;
+     private String authPhoneNumber, pushKey, status, timeOrderPlaced;
      private String FruitsList = "";
      private int totalPrice = 0;
 
      private CheckoutUser user;
      private User u;
 
-     private TextView listOfFruitsTextView, grandTotalTextView, paymentMethodTextView, userNameTextView, phoneNumberTextView1, phoneNumberTextView2, buildingTextView, wingLetterTextView, roomNumberTextView, statusTextView;
+     private TextView listOfFruitsTextView, grandTotalTextView, paymentMethodTextView, userNameTextView, phoneNumberTextView1, phoneNumberTextView2, buildingTextView, wingLetterTextView, roomNumberTextView, statusTextView, orderPlacedTimeTextView;
      private Button statusOrderOnWayButton, statusOrderDeliveredButton, statusOrderCancelledButton;
+
+     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+     private Date date;
 
      public ParticularOrderDetailsFragment() {
           // Required empty public constructor
@@ -63,6 +69,10 @@ public class ParticularOrderDetailsFragment extends Fragment {
           authPhoneNumber = u.getPhoneNum1();
           pushKey = user.getFirebaseDatabaseKey();
           status = user.getStatus();
+          timeOrderPlaced = user.getOrderPlacedDate();
+
+          formatter.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+          date = new Date(Long.parseLong(timeOrderPlaced));
 
           allPreviousOrdersViewModel = new ViewModelProvider(this).get(AllPreviousOrdersViewModel.class);
      }
@@ -115,8 +125,9 @@ public class ParticularOrderDetailsFragment extends Fragment {
                     //user will remove it from Delivered orders and add it to the shared preferences
                     user.setStatus("ORDER DELIVERED");
 
-                    //TODO implement addOrderToAllPreviousOrdersFragment - use Room database here for storage
-                    //TODO and make sure to update status ORDER DELIVERED there
+                    long orderDeliveredDate = System.currentTimeMillis();
+                    user.setOrderDeliveredOrCancelledDate(orderDeliveredDate+"");
+
                     removeOrderFromOrders();
                     moveOrderToDeliveredOrCancelled(v);
                }
@@ -176,7 +187,7 @@ public class ParticularOrderDetailsFragment extends Fragment {
 
      private void addOrderToAllPreviousOrdersFragment() {
           String Address ="Building:" + u.getBuilding() + ", wing:" + u.getWing() + ", Room:" + u.getRoom();
-          DatabaseNode node = new DatabaseNode(u.getUserName(), u.getPhoneNum1(), u.getPhoneNum2(), FruitsList, Integer.toString(totalPrice), user.getStatus(), user.getPaymentMethod(), Address);
+          DatabaseNode node = new DatabaseNode(u.getUserName(), u.getPhoneNum1(), u.getPhoneNum2(), FruitsList, Integer.toString(totalPrice), user.getOrderPlacedDate(), user.getOrderDeliveredOrCancelledDate() ,user.getStatus(), user.getPaymentMethod(), Address);
           allPreviousOrdersViewModel.insert(node);
      }
 
@@ -205,6 +216,7 @@ public class ParticularOrderDetailsFragment extends Fragment {
           roomNumberTextView.setText("Room Number : " + u.getRoom());
 
           statusTextView.setText("Status : " + user.getStatus());
+          orderPlacedTimeTextView.setText("Time Order Placed : " + formatter.format(date));
      }
 
      private void setIds(View v) {
@@ -218,6 +230,7 @@ public class ParticularOrderDetailsFragment extends Fragment {
           wingLetterTextView = v.findViewById(R.id.wingLetterTextView);
           roomNumberTextView = v.findViewById(R.id.roomNumberTextView);
           statusTextView = v.findViewById(R.id.statusTextView);
+          orderPlacedTimeTextView = v.findViewById(R.id.time_order_placed_text_view);
 
           statusOrderOnWayButton = v.findViewById(R.id.statusOrderOnWayButton);
           statusOrderDeliveredButton = v.findViewById(R.id.statusOrderDeliveredButton);

@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.sql.Time;
+
 @Entity(tableName = "all_previous_orders_database")
 public class DatabaseNode implements Parcelable {
 
@@ -17,25 +19,27 @@ public class DatabaseNode implements Parcelable {
      private String PhoneNumber2;
      private String OrderDetails;
      private String GrandTotal;
-     //TODO Implement below both
-     //private String OrderStartDate;
-     //private String OrderCompleteDate;
+     private String TimeOrderPlaced;
+     private String TimeOrderDeliveredOrCancelled;
      private String OrderStatus;
      private String PaymentMethod;
      private String Address;
 
      public DatabaseNode(String Name, String PhoneNumber1, String PhoneNumber2, String OrderDetails, String GrandTotal,
-                         /*String OrderStartDate, String OrderCompleteDate,*/ String OrderStatus, String PaymentMethod,
+                         String TimeOrderPlaced, String TimeOrderDeliveredOrCancelled, String OrderStatus, String PaymentMethod,
                          String Address){
           this.Name = Name;
           this.PhoneNumber1 = PhoneNumber1;
           this.PhoneNumber2 = PhoneNumber2;
           this.OrderDetails = OrderDetails;
           this.GrandTotal = GrandTotal;
+          this.TimeOrderPlaced = TimeOrderPlaced;
+          this.TimeOrderDeliveredOrCancelled = TimeOrderDeliveredOrCancelled;
           this.OrderStatus = OrderStatus;
           this.PaymentMethod = PaymentMethod;
           this.Address = Address;
      }
+
 
      protected DatabaseNode(Parcel in) {
           id = in.readInt();
@@ -44,6 +48,8 @@ public class DatabaseNode implements Parcelable {
           PhoneNumber2 = in.readString();
           OrderDetails = in.readString();
           GrandTotal = in.readString();
+          TimeOrderPlaced = in.readString();
+          TimeOrderDeliveredOrCancelled = in.readString();
           OrderStatus = in.readString();
           PaymentMethod = in.readString();
           Address = in.readString();
@@ -101,6 +107,14 @@ public class DatabaseNode implements Parcelable {
           return Address;
      }
 
+     public String getTimeOrderPlaced() {
+          return TimeOrderPlaced;
+     }
+
+     public String getTimeOrderDeliveredOrCancelled() {
+          return TimeOrderDeliveredOrCancelled;
+     }
+
      @Override
      public int describeContents() {
           return 0;
@@ -114,6 +128,8 @@ public class DatabaseNode implements Parcelable {
           dest.writeString(PhoneNumber2);
           dest.writeString(OrderDetails);
           dest.writeString(GrandTotal);
+          dest.writeString(TimeOrderPlaced);
+          dest.writeString(TimeOrderDeliveredOrCancelled);
           dest.writeString(OrderStatus);
           dest.writeString(PaymentMethod);
           dest.writeString(Address);

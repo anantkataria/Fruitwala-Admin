@@ -13,6 +13,7 @@
         <!--    initially order then user information then buttons as decided-->
         <TextView
             android:text="ORDER:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
             android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:id="@+id/listOfFruitsTextView"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textSize="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/black"
             android:text="Apple 1kg, 100 Rs.\nBananas 1kg, 50 Rs.\nOranges 1kg, 80 Rs."
             android:layout_width="match_parent"
@@ -30,6 +31,7 @@
 
         <TextView
             android:id="@+id/grandTotalTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Total bill for User : 230 Rs."
             android:textColor="@android:color/holo_red_light"
             android:layout_marginTop="8dp"
@@ -39,6 +41,7 @@
 
         <TextView
             android:id="@+id/paymentMethodTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Payment method = COD"
             android:textColor="@android:color/holo_green_dark"
             android:layout_marginTop="8dp"
@@ -48,6 +51,7 @@
 
         <TextView
             android:id="@+id/statusTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/black"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
@@ -56,6 +60,25 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/time_order_placed_text_view"
+            android:text="Ordered : 25/04/2020 14:50:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/time_order_delivered_or_cancelled_text_view"
+            android:text="Delivered : 25/04/2020 15:05:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_marginTop="32dp"
             android:layout_marginStart="8dp"
             android:text="USER:"
@@ -64,6 +87,7 @@
 
         <TextView
             android:id="@+id/userNameTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Name : Anant kataria"
             android:textColor="@android:color/black"
             android:layout_marginTop="16dp"
@@ -72,6 +96,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:id="@+id/phoneNumberTextView1"
             android:text="Phone Number1 : +916353923876"
             android:layout_marginTop="8dp"
@@ -80,6 +105,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:id="@+id/phoneNumberTextView2"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -89,6 +115,7 @@
 
         <TextView
             android:id="@+id/addressTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Address : 1"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"

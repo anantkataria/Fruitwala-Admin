@@ -14,6 +14,7 @@
         <!--    initially order then user information then buttons as decided-->
         <TextView
             android:text="ORDER:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
             android:layout_width="match_parent"
@@ -21,9 +22,9 @@
 
         <TextView
             android:id="@+id/listOfFruitsTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textSize="16dp"
             android:textColor="@android:color/black"
             android:text="Apple 1kg, 100 Rs.\nBananas 1kg, 50 Rs.\nOranges 1kg, 80 Rs."
             android:layout_width="match_parent"
@@ -31,6 +32,7 @@
 
         <TextView
             android:id="@+id/grandTotalTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Total bill for User : 230 Rs."
             android:textColor="@android:color/holo_red_light"
             android:layout_marginTop="8dp"
@@ -41,6 +43,7 @@
         <TextView
             android:id="@+id/paymentMethodTextView"
             android:text="Payment method = COD"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/holo_green_dark"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
@@ -48,6 +51,16 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/time_order_placed_text_view"
+            android:text="Time Order Placed : 25/04/2020 12:09:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_marginTop="32dp"
             android:layout_marginStart="8dp"
             android:text="USER:"
@@ -56,6 +69,7 @@
 
         <TextView
             android:id="@+id/userNameTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Name : Anant kataria"
             android:textColor="@android:color/black"
             android:layout_marginTop="16dp"
@@ -65,6 +79,7 @@
 
         <TextView
             android:id="@+id/phoneNumberTextView1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Phone Number1 : +916353923876"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
@@ -73,6 +88,7 @@
 
         <TextView
             android:id="@+id/phoneNumberTextView2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Phone Number2 : not given"
@@ -81,6 +97,7 @@
 
         <TextView
             android:id="@+id/buildingTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Building : 1"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
@@ -89,6 +106,7 @@
 
         <TextView
             android:id="@+id/wingLetterTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_marginStart="16dp"
             android:text="WingLetter : F"
             android:layout_width="match_parent"
@@ -96,6 +114,7 @@
 
         <TextView
             android:id="@+id/roomNumberTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="RoomNumber : 110"
             android:layout_marginStart="16dp"
             android:layout_width="match_parent"
@@ -104,7 +123,7 @@
         <TextView
             android:id="@+id/statusTextView"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_marginTop="32dp"
             android:layout_marginStart="8dp"
             android:text="Status : ORDER PROCESSING"

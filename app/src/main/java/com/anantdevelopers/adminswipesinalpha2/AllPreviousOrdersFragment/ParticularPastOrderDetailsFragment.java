@@ -13,14 +13,20 @@ import android.widget.TextView;
 import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.DatabaseNode;
 import com.anantdevelopers.adminswipesinalpha2.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ParticularPastOrderDetailsFragment extends Fragment {
 
-     private TextView listOfFruitsTextView, grandTotalTextView, paymentMethodTextView, userNameTextView, phoneNumberTextView1, phoneNumberTextView2, statusTextView, addressTextView;
+     private TextView listOfFruitsTextView, grandTotalTextView, paymentMethodTextView, userNameTextView, phoneNumberTextView1, phoneNumberTextView2, statusTextView, addressTextView, timeOrderPlacedTextView, timeOrderDeliveredOrCancelledTextView;
 
      private DatabaseNode node;
+
+     private String timeOrderPlacedText, timeOrderDeliveredOrCancelledText, orderStatus;
 
      public ParticularPastOrderDetailsFragment() {
           // Required empty public constructor
@@ -32,6 +38,23 @@ public class ParticularPastOrderDetailsFragment extends Fragment {
 
           Bundle b = getArguments();
           node = b.getParcelable("Order");
+
+          orderStatus = node.getOrderStatus();
+
+          SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+          formatter.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+
+          Date timeOrderPlaced = new Date(Long.parseLong(node.getTimeOrderPlaced()));
+          Date timeOrderDeliveredOrCancelled = new Date(Long.parseLong(node.getTimeOrderDeliveredOrCancelled()));
+
+          timeOrderPlacedText = "Ordered : " + formatter.format(timeOrderPlaced);
+          timeOrderDeliveredOrCancelledText = formatter.format(timeOrderDeliveredOrCancelled);
+          if(orderStatus.equals("ORDER DELIVERED")){
+               timeOrderDeliveredOrCancelledText = "Delivered : " + timeOrderDeliveredOrCancelledText;
+          }else {
+               timeOrderDeliveredOrCancelledText = "Cancelled : " + timeOrderDeliveredOrCancelledText;
+          }
+
      }
 
      @Override
@@ -54,7 +77,9 @@ public class ParticularPastOrderDetailsFragment extends Fragment {
           phoneNumberTextView1.setText("Phone Number 1 : " + node.getPhoneNumber1());
           phoneNumberTextView2.setText("Phone Number 2 : " + node.getPhoneNumber2());
           addressTextView.setText("Address : " + node.getAddress());
-          statusTextView.setText("Status : " + node.getOrderStatus());
+          statusTextView.setText("Status : " + orderStatus);
+          timeOrderPlacedTextView.setText(timeOrderPlacedText);
+          timeOrderDeliveredOrCancelledTextView.setText(timeOrderDeliveredOrCancelledText);
      }
 
      private void setIds(View v) {
@@ -66,5 +91,7 @@ public class ParticularPastOrderDetailsFragment extends Fragment {
           phoneNumberTextView2 = v.findViewById(R.id.phoneNumberTextView2);
           addressTextView = v.findViewById(R.id.addressTextView);
           statusTextView = v.findViewById(R.id.statusTextView);
+          timeOrderPlacedTextView = v.findViewById(R.id.time_order_placed_text_view);
+          timeOrderDeliveredOrCancelledTextView = v.findViewById(R.id.time_order_delivered_or_cancelled_text_view);
      }
 }

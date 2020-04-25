@@ -11,27 +11,50 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/nameTxt"
+            android:id="@+id/userNameTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="20sp"
-            tools:text="Anant Kataria"/>
+            tools:text="Anant Kataria" />
 
         <TextView
-            android:id="@+id/phoneNumberTxt"
-            android:layout_below="@id/nameTxt"
+            android:id="@+id/order_placed_time_text_view"
+            android:layout_below="@+id/userNameTxt"
+            tools:text="Ordered : 25/04/2020 11:34:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            tools:text="+916353923876"/>
+            android:layout_height="wrap_content"/>
 
-<!--        add order date and time, and order number-->
-<!--        and maybe a copy number to clipboard functionality-->
+        <TextView
+            android:id="@+id/order_delivered_or_cancelled_text_view"
+            android:text="Delivered : 25/04/2020 11:45:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_below="@+id/order_placed_time_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/userPhoneNumberTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_delivered_or_cancelled_text_view"
+            android:layout_toStartOf="@+id/copyPhoneNumberImg"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:text="+916353923876" />
+
+        <ImageView
+            android:id="@+id/copyPhoneNumberImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_delivered_or_cancelled_text_view"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/copy_phone_number_img" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
