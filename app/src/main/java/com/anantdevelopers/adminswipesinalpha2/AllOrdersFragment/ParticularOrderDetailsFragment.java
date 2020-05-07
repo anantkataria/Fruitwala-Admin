@@ -1,5 +1,6 @@
 package com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -146,6 +147,8 @@ public class ParticularOrderDetailsFragment extends Fragment {
                     //when the order cancelled is COD then it will be pretty much similar to the delivered case
                     //but when it is UPIpayment, we will have to do one extra work which is pay the user back and assure them that their payment
                     //will be debited back in 30 or so minutes
+
+
                }
           });
 
@@ -215,7 +218,12 @@ public class ParticularOrderDetailsFragment extends Fragment {
           wingLetterTextView.setText("WingLetter : " + u.getWing());
           roomNumberTextView.setText("Room Number : " + u.getRoom());
 
-          statusTextView.setText("Status : " + user.getStatus());
+          String status = user.getStatus();
+          statusTextView.setText("Status : " + status);
+          if(status.equals("CANCELLATION REQUESTED")){
+               statusTextView.setTextColor(Color.parseColor("#cc0000"));
+          }
+
           orderPlacedTimeTextView.setText("Time Order Placed : " + formatter.format(date));
      }
 

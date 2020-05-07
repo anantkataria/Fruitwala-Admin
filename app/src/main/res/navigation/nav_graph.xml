@@ -35,7 +35,15 @@
         android:id="@+id/closed_today_dest"
         android:name="com.anantdevelopers.adminswipesinalpha2.CloseTheStoreFragment.CloseTheStoreFragment"
         android:label="Close The Store"
-        tools:layout="@layout/fragment_close_the_store" />
+        tools:layout="@layout/fragment_close_the_store" >
+        <action
+            android:id="@+id/action_closed_today_dest_to_closingDescriptionFragment"
+            app:destination="@id/closingDescriptionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/all_previous_orders_dest"
         android:name="com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.AllPreviousOrdersFragment"
@@ -76,5 +84,10 @@
         android:name="com.anantdevelopers.adminswipesinalpha2.ChangeFruitPricesFragment.ParticularFruitDetailsFragment.NewQtyPriceEntryFragment"
         android:label="fragment_new_qty_price_entry"
         tools:layout="@layout/fragment_new_qty_price_entry" />
+    <fragment
+        android:id="@+id/closingDescriptionFragment"
+        android:name="com.anantdevelopers.adminswipesinalpha2.CloseTheStoreFragment.ClosingDescriptionFragment"
+        android:label="fragment_closing_description"
+        tools:layout="@layout/fragment_closing_description" />
 
 </navigation>

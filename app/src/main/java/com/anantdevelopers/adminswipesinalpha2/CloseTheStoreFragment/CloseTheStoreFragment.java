@@ -1,66 +1,197 @@
+
 package com.anantdevelopers.adminswipesinalpha2.CloseTheStoreFragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anantdevelopers.adminswipesinalpha2.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import static android.view.View.GONE;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CloseTheStoreFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CloseTheStoreFragment extends Fragment {
-     // TODO: Rename parameter arguments, choose names that match
-     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-     private static final String ARG_PARAM1 = "param1";
-     private static final String ARG_PARAM2 = "param2";
 
-     // TODO: Rename and change types of parameters
-     private String mParam1;
-     private String mParam2;
+     private Button openCloseButton, noticeButton;
+     private TextView openCloseTextView;
+     private ProgressBar progressBar;
+     private ValueEventListener listener;
+
+     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+     String openAgainTimeString = "nothing";
+
+     private interface afterFetch{
+          void afterFetching(boolean isOpen);
+     }
 
      public CloseTheStoreFragment() {
           // Required empty public constructor
      }
 
-     /**
-      * Use this factory method to create a new instance of
-      * this fragment using the provided parameters.
-      *
-      * @param param1 Parameter 1.
-      * @param param2 Parameter 2.
-      * @return A new instance of fragment CloseTheStoreFragment.
-      */
-     // TODO: Rename and change types and number of parameters
-     public static CloseTheStoreFragment newInstance(String param1, String param2) {
-          CloseTheStoreFragment fragment = new CloseTheStoreFragment();
-          Bundle args = new Bundle();
-          args.putString(ARG_PARAM1, param1);
-          args.putString(ARG_PARAM2, param2);
-          fragment.setArguments(args);
-          return fragment;
-     }
-
      @Override
      public void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
-          if (getArguments() != null) {
-               mParam1 = getArguments().getString(ARG_PARAM1);
-               mParam2 = getArguments().getString(ARG_PARAM2);
-          }
      }
 
      @Override
      public View onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
           // Inflate the layout for this fragment
-          return inflater.inflate(R.layout.fragment_close_the_store, container, false);
+          final View view = inflater.inflate(R.layout.fragment_close_the_store, container, false);
+
+          openCloseButton = view.findViewById(R.id.open_close_button);
+          openCloseTextView = view.findViewById(R.id.open_close_textView);
+          noticeButton = view.findViewById(R.id.notice_button);
+          progressBar = view.findViewById(R.id.progress_bar);
+
+          getData(new afterFetch() {
+               @Override
+               public void afterFetching(boolean isOpen) {
+                    if(!isOpen){
+                         openCloseTextView.setText("Closed");
+                         openCloseButton.setText("Open Stores");
+                         openCloseButton.setBackgroundColor(getResources().getColor(R.color.holoGreenLight));
+                         noticeButton.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                         openCloseTextView.setText("Open");
+                         openCloseButton.setText("Close Stores");
+                         openCloseButton.setBackgroundColor(getResources().getColor(R.color.holoRedLight));
+                         noticeButton.setVisibility(GONE);
+                    }
+                    changeVisibilitiesToNormal();
+               }
+          });
+
+          openCloseButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                    if(openCloseTextView.getText().equals(getString(R.string.open_string))){
+                         //store is open
+                         //store should be closed
+                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                         builder.setMessage("Are you sure you want to close the store?");
+                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                   dialog.dismiss();
+                                   Navigation.findNavController(view).navigate(R.id.action_closed_today_dest_to_closingDescriptionFragment);
+                              }
+                         });
+                         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                   dialog.dismiss();
+                              }
+                         });
+
+                         AlertDialog dialog = builder.create();
+                         dialog.show();
+
+                    }
+                    else {
+                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                         builder.setMessage("Are you sure you want to open the store?");
+                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                   DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+                                   databaseReference.child("OpenOrClose").child("isOpen").setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                             if(task.isSuccessful()){
+                                                  Toast.makeText(getContext(), "Store Opened Successfully!", Toast.LENGTH_SHORT).show();
+                                             }else {
+                                                  Toast.makeText(getContext(), "Something Went Wrong!", Toast.LENGTH_LONG).show();
+                                             }
+                                        }
+                                   });
+                              }
+                         });
+                         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                   dialog.dismiss();
+                              }
+                         });
+
+                         AlertDialog dialog = builder.create();
+                         dialog.show();
+                    }
+               }
+          });
+
+          noticeButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                    Bundle b = new Bundle();
+                    b.putString("openAgainTimeString", openAgainTimeString);
+                    Navigation.findNavController(view).navigate(R.id.action_closed_today_dest_to_closingDescriptionFragment, b);
+               }
+          });
+
+          return view;
+     }
+
+     private void getData(final afterFetch afterFetch) {
+          listener = new ValueEventListener() {
+
+               @Override
+               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    changeVisibilitiesToFetchingMode();
+
+                    boolean isOpen = dataSnapshot.child("isOpen").getValue(Boolean.class);
+                    openAgainTimeString = dataSnapshot.child("openingAgainTime").getValue(String.class);
+
+                    afterFetch.afterFetching(isOpen);
+               }
+
+               @Override
+               public void onCancelled(@NonNull DatabaseError databaseError) {
+
+               }
+          };
+
+          databaseReference.child("OpenOrClose").addValueEventListener(listener);
+     }
+
+     private void changeVisibilitiesToFetchingMode() {
+          openCloseTextView.setVisibility(GONE);
+          progressBar.setVisibility(View.VISIBLE);
+          noticeButton.setVisibility(GONE);
+          openCloseButton.setVisibility(GONE);
+     }
+
+     private void changeVisibilitiesToNormal() {
+          openCloseTextView.setVisibility(View.VISIBLE);
+          progressBar.setVisibility(GONE);
+          openCloseButton.setVisibility(View.VISIBLE);
+     }
+
+     @Override
+     public void onDestroyView() {
+          super.onDestroyView();
+          databaseReference.child("OpenOrClose").removeEventListener(listener);
      }
 }

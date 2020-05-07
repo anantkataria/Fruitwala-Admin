@@ -28,8 +28,8 @@ import java.util.ArrayList;
 
 public class AllOrdersFragment extends Fragment {
 
-     FirebaseDatabase firebaseDatabase;
-     DatabaseReference databaseReference;
+     private FirebaseDatabase firebaseDatabase;
+     private DatabaseReference databaseReference;
 
      private RecyclerView recyclerView;
      private ProgressBar progressBar;

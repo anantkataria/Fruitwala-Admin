@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    tools:context=".CloseTheStoreFragment.ClosingDescriptionFragment">
+
+    <TextView
+        android:id="@+id/hard_coded_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/la_belle_aurore"
+        android:gravity="center"
+        android:text="When will it get RESUMED"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/open_again_time_edit_text"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_below="@+id/hard_coded_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:fontFamily="@font/la_belle_aurore"
+        android:text="Upload"
+        android:elevation="5dp"
+        android:shadowColor="@color/colorPrimary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

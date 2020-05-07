@@ -55,6 +55,9 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
           holder.userPhoneNumberTxt.setText(u.getPhoneNum1());
           holder.userAddressTxt.setText(u.getWing() + " - " + u.getRoom());
           holder.orderPlacedTimeTxt.setText("Ordered : " + formatter.format(date));
+          if(user.getStatus().equals("CANCELLATION REQUESTED")){
+               holder.cancellationRequestedTxt.setVisibility(View.VISIBLE);
+          }
      }
 
      @Override
@@ -68,6 +71,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
           TextView userAddressTxt;
           TextView userPhoneNumberTxt;
           TextView orderPlacedTimeTxt;
+          TextView cancellationRequestedTxt;
 
           ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
                super(itemView);
@@ -75,6 +79,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
                userAddressTxt = itemView.findViewById(R.id.userAddressTxt);
                userPhoneNumberTxt = itemView.findViewById(R.id.userPhoneNumberTxt);
                orderPlacedTimeTxt = itemView.findViewById(R.id.order_placed_time_text_view);
+               cancellationRequestedTxt = itemView.findViewById(R.id.cancellation_requested_text_view);
 
                itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
