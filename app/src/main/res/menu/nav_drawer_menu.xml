@@ -18,4 +18,8 @@
         android:id="@+id/closed_today_dest"
         android:title="Close The Store"/>
 
+    <item
+        android:id="@+id/change_website_url_dest"
+        android:title="Change Website URL"/>
+
 </menu>

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
           NavigationView navigationView = findViewById(R.id.nav_view);
 
-          appBarConfiguration = new AppBarConfiguration.Builder(R.id.all_orders_dest, R.id.change_fruit_prices_dest, R.id.all_previous_orders_dest, R.id.closed_today_dest).setDrawerLayout(drawer).build();
+          appBarConfiguration = new AppBarConfiguration.Builder(R.id.all_orders_dest, R.id.change_fruit_prices_dest, R.id.all_previous_orders_dest, R.id.closed_today_dest, R.id.change_website_url_dest).setDrawerLayout(drawer).build();
           NavController navController = Navigation.findNavController(this, R.id.my_nav_host_fragment);
 
           NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
