@@ -75,6 +75,7 @@ public class AllOrdersFragment extends Fragment {
                          noOrdersTxt.setVisibility(View.VISIBLE);
                     }
                     else {
+                         noOrdersTxt.setVisibility(View.GONE);
                          adapter = new OrderItemAdapter(orders);
                          progressBar.setVisibility(View.GONE);
                          recyclerView.setVisibility(View.VISIBLE);

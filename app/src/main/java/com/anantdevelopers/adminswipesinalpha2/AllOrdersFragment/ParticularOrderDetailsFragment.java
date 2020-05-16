@@ -82,9 +82,9 @@ public class ParticularOrderDetailsFragment extends Fragment {
      public View onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
           // Inflate the layout for this fragment
-          View v = inflater.inflate(R.layout.fragment_particular_order_details, container, false);
+          final View view = inflater.inflate(R.layout.fragment_particular_order_details, container, false);
 
-          setIds(v);
+          setIds(view);
           setTexts();
 
           statusOrderOnWayButton.setOnClickListener(new View.OnClickListener() {
@@ -147,12 +147,14 @@ public class ParticularOrderDetailsFragment extends Fragment {
                     //when the order cancelled is COD then it will be pretty much similar to the delivered case
                     //but when it is UPIpayment, we will have to do one extra work which is pay the user back and assure them that their payment
                     //will be debited back in 30 or so minutes
-
-
+                    Bundle b = new Bundle();
+                    b.putParcelable("Order", user);
+                    b.putParcelable("user", u);
+                    Navigation.findNavController(view).navigate(R.id.action_particularOrderDetailsFragment_to_orderCancellationReasonFragment, b);
                }
           });
 
-          return v;
+          return view;
      }
 
      private void removeOrderFromOrders() {
@@ -170,7 +172,7 @@ public class ParticularOrderDetailsFragment extends Fragment {
      }
 
      private void moveOrderToDeliveredOrCancelled(final View v) {
-          databaseReference.child("Delivered or Cancelled").child(authPhoneNumber).child(pushKey).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+          databaseReference.child("Delivered or Cancelled").child(authPhoneNumber).child(pushKey).child("Order").setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                @Override
                public void onSuccess(Void aVoid) {
                     Toast.makeText(getContext(), "Added To 'Delivered or Cancelled'", Toast.LENGTH_SHORT).show();

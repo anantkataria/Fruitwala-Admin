@@ -1,5 +1,6 @@
 package com.anantdevelopers.adminswipesinalpha2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,14 +10,25 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 
 public class MainActivity extends AppCompatActivity {
 
      private AppBarConfiguration appBarConfiguration;
+
+     private String token;
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,32 @@ public class MainActivity extends AppCompatActivity {
           NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
           NavigationUI.setupWithNavController(navigationView, navController);
 
+          getToken();
      }
 
+     private void sendToken() {
+          DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+          databaseReference.child("tokens").child("adminToken").setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+               @Override
+               public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                         Toast.makeText(MainActivity.this, "Token updated successfully", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                         Toast.makeText(MainActivity.this, "Problem occurred during token updation", Toast.LENGTH_LONG).show();
+                    }
+               }
+          });
+     }
+
+     private void getToken() {
+          FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+               @Override
+               public void onSuccess(InstanceIdResult instanceIdResult) {
+                    token = instanceIdResult.getToken();
+                    sendToken();
+               }
+          });
+     }
 }

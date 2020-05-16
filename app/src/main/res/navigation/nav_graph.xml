@@ -61,7 +61,15 @@
         android:id="@+id/particularOrderDetailsFragment"
         android:name="com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment.ParticularOrderDetailsFragment"
         android:label="Order"
-        tools:layout="@layout/fragment_particular_order_details" />
+        tools:layout="@layout/fragment_particular_order_details" >
+        <action
+            android:id="@+id/action_particularOrderDetailsFragment_to_orderCancellationReasonFragment"
+            app:destination="@id/orderCancellationReasonFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/particularPastOrderDetailsFragment"
         android:name="com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.ParticularPastOrderDetailsFragment"
@@ -107,5 +115,10 @@
         android:name="com.anantdevelopers.adminswipesinalpha2.ChangeWebsiteUrlFragment.ChangeWebsiteUrlFragment2"
         android:label="Change URL"
         tools:layout="@layout/fragment_change_website_url2" />
+    <fragment
+        android:id="@+id/orderCancellationReasonFragment"
+        android:name="com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment.OrderCancellationReasonFragment"
+        android:label="fragment_order_cancellation_reason"
+        tools:layout="@layout/fragment_order_cancellation_reason" />
 
 </navigation>
