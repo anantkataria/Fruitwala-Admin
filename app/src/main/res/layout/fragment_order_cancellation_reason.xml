@@ -27,6 +27,14 @@
         android:gravity="center"
         />
 
+    <TextView
+        android:id="@+id/payment_method_text_view"
+        android:text="Payment Method : "
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/cancel_order_button"
         android:text="Cancel Order"

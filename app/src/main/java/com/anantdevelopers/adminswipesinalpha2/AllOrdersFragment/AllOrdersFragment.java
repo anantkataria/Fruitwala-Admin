@@ -1,5 +1,8 @@
 package com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anantdevelopers.adminswipesinalpha2.Stuff.CheckoutUser;
 import com.anantdevelopers.adminswipesinalpha2.R;
@@ -100,6 +104,15 @@ public class AllOrdersFragment extends Fragment {
                     b.putParcelable("user", orders.get(position).getUser());
                     //Navigation.createNavigateOnClickListener(R.id.action_all_orders_dest_to_particularOrderDetailsFragment, null);
                     Navigation.findNavController(v).navigate(R.id.action_all_orders_dest_to_particularOrderDetailsFragment, b);
+               }
+
+               @Override
+               public void onCopyImageClick(int position) {
+                    String phoneNumber = orders.get(position).getUser().getPhoneNum1();
+                    ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("phoneNumber", phoneNumber);
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(getContext(), "Number Copied", Toast.LENGTH_SHORT).show();
                }
           });
      }

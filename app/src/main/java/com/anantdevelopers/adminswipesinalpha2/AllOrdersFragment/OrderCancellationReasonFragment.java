@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anantdevelopers.adminswipesinalpha2.AllPreviousOrdersFragment.LocalDatabase.AllPreviousOrdersViewModel;
@@ -73,7 +74,10 @@ public class OrderCancellationReasonFragment extends Fragment {
 
           parentLayout = view.findViewById(R.id.parent_layout);
           Button cancelOrderButton = view.findViewById(R.id.cancel_order_button);
+          TextView paymentMethodTextView = view.findViewById(R.id.payment_method_text_view);
           cancellationReasonEditText = view.findViewById(R.id.cancellation_reason_edit_text);
+
+          paymentMethodTextView.setText("Payment Method : " + user.getPaymentMethod());
 
           cancelOrderButton.setOnClickListener(new View.OnClickListener() {
                @Override

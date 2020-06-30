@@ -3,6 +3,7 @@ package com.anantdevelopers.adminswipesinalpha2.AllOrdersFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,9 +32,10 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 
      public interface OnItemClickListener{
           void onItemClick(int position);
+          void onCopyImageClick(int position);
      }
 
-     public void setOnItemClickListener(OnItemClickListener listener){
+     void setOnItemClickListener(OnItemClickListener listener){
           mListener = listener;
      }
 
@@ -72,6 +74,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
           TextView userPhoneNumberTxt;
           TextView orderPlacedTimeTxt;
           TextView cancellationRequestedTxt;
+          ImageView copyPhoneNumberImage;
 
           ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
                super(itemView);
@@ -80,6 +83,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
                userPhoneNumberTxt = itemView.findViewById(R.id.userPhoneNumberTxt);
                orderPlacedTimeTxt = itemView.findViewById(R.id.order_placed_time_text_view);
                cancellationRequestedTxt = itemView.findViewById(R.id.cancellation_requested_text_view);
+               copyPhoneNumberImage = itemView.findViewById(R.id.copyPhoneNumberImg);
 
                itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -88,6 +92,18 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
                               int position = getAdapterPosition();
                               if(position != RecyclerView.NO_POSITION){
                                    listener.onItemClick(position);
+                              }
+                         }
+                    }
+               });
+
+               copyPhoneNumberImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                         if(listener != null){
+                              int position = getAdapterPosition();
+                              if(position != RecyclerView.NO_POSITION){
+                                   listener.onCopyImageClick(position);
                               }
                          }
                     }

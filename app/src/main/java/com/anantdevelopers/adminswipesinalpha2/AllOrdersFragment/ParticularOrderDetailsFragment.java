@@ -138,15 +138,6 @@ public class ParticularOrderDetailsFragment extends Fragment {
                @Override
                public void onClick(View v) {
 
-                    //first , the user will request the cancel and if I approve the request then
-                    //only cancel the order
-
-                    //when status is "CANCEL REQUESTED", if i have brought the fruit than
-                    //i will call him and say cancel is not possible, otherwise i will press this button
-
-                    //when the order cancelled is COD then it will be pretty much similar to the delivered case
-                    //but when it is UPIpayment, we will have to do one extra work which is pay the user back and assure them that their payment
-                    //will be debited back in 30 or so minutes
                     Bundle b = new Bundle();
                     b.putParcelable("Order", user);
                     b.putParcelable("user", u);
